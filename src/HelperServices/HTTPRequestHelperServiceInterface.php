@@ -8,8 +8,9 @@ interface HTTPRequestHelperServiceInterface
 {
     /**
      * Both Guzzle and Symfony HTTP Foundation retrieve the
-     * header values as `string[]`, but in the HTTPRequest
-     * and HTTPResponse representation it can be `string|string[]`.
+     * header values as `string[]`, but for the HTTP Request,
+     * and in class HTTPResponse, the representation can
+     * be `string|string[]`.
      *
      * So iterate all the headers and, if any of them has only one
      * item, convert it from array to string.
