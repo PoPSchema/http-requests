@@ -13,20 +13,38 @@ class HTTPRequestHelperService implements HTTPRequestHelperServiceInterface
     /**
      * Both Guzzle and Symfony HTTP Foundation retrieve the
      * header values as `string[]`, but for the HTTP Request,
-     * and in class HTTPResponse, the representation can
-     * be `string|string[]`.
+     * and in class HTTPResponse, the representation must
+     * be `string`.
      *
-     * So iterate all the headers and, if any of them has only one
-     * item, convert it from array to string.
+     * So iterate all the headers and convert it from
+     * array to string.
      *
      * @param array<string,string[]> $headers
-     * @return array<string,string|string[]>
+     * @return array<string,string>
      */
-    public function convertHeaderArrayValuesToSingleValues(array $headers): array
+    public function convertHeaderArrayValuesToSingleValue(array $headers): array
     {
+        $convertedHeaders = [];
         foreach ($headers as $name => $headerValues) {
-            $headers[$name] = count($headerValues) === 1 ? $headerValues[0] : $headerValues;
+            $convertedHeaders[$name] = $this->convertHeaderArrayValueToSingleValue($headerValues, $name);
         }
-        return $headers;
+        return $convertedHeaders;
+    }
+
+    /**
+     * Decide how to convert the array of values for the header
+     * into a single value.
+     *
+     * Currently it simply joins all values with ",", but specific
+     * headers might need a different logic (eg: have the last entry
+     * override all previous entries).
+     *
+     * @todo Decide on a header-by-header basis.
+     *
+     * @param string[] $headerValues
+     */
+    protected function convertHeaderArrayValueToSingleValue(array $headerValues, string $headerName): string
+    {
+        return implode(', ', $headerValues);
     }
 }
