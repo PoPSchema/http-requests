@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\HTTPRequests\HelperServices;
+namespace PoPSchema\HTTPRequests\Facades\HelperServices;
 
 use PoPSchema\HTTPRequests\HelperServices\HTTPRequestHelperServiceInterface;
 use PoP\Root\App;
