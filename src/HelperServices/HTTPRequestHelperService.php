@@ -38,7 +38,7 @@ class HTTPRequestHelperService implements HTTPRequestHelperServiceInterface
      * Currently it simply joins all values with ",", but specific
      * headers might need a different logic (eg: have the last entry
      * override all previous entries).
-     * 
+     *
      * From RFC 9110 - HTTP Semantics:
      *
      *   > A recipient MAY combine multiple field lines within a field section
@@ -47,7 +47,7 @@ class HTTPRequestHelperService implements HTTPRequestHelperServiceInterface
      *   > line value to the initial field line value in order, separated by
      *   > a comma (",") and optional whitespace (OWS, defined in Section 5.6.3).
      *   > For consistency, use comma SP.
-     * 
+     *
      * @see https://www.rfc-editor.org/rfc/rfc9110.html#section-5.3
      *
      * @todo Decide on a header-by-header basis.
